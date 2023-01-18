@@ -1,0 +1,72 @@
+server:
+  port: 43310
+
+tencent:
+  wechat:
+    appId: wx1a8f48c9d39c7280
+    appSecret: a7fd347472a3985689dccde0bf5c108a
+    topColor: "#FF0000"
+  templateList:
+    type: 1
+    templateId: VgTRoZY-lXXL6fgJT3ckFxMs5SqXAXGlXroxZC2DvmQ
+tianxin:
+  server: https://api.tianapi.com
+  key: 72a1257e8b9ee894ea5d43dd32cd47af
+spring:
+  application:
+    name: daily-weather
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/weather?useSSL=false&useUnicode=true&characterEncodings=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: study
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: MyHikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jpa:
+    show-sql: true # 默认false，在日志里显示执行的sql语句
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update #指定为update，每次启动项目检测表结构有变化的时候会新增字段，表不存在时会 新建，如果指定create，则每次启动项目都会清空数据并删除表，再新建
+      naming:
+        #指定jpa的自动表生成策略，驼峰自动映射为下划线格式7
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        #physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  redis:
+    host: 192.168.17.130
+    port: 6379
+    password: 200228
+    database: 5
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    # ??????????
+    timeout: 5000
+  cache:
+    type: redis
+
+cache:
+  default-exp: 7000 # 默认缓存时间，单位秒
+  # 日志
+#logging:
+#  config: classpath:logback-spring-dev.xml
